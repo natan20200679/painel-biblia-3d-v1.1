@@ -10,36 +10,17 @@ from .forms import LoginForm
 from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
 
-
 def login_view(request):
-    if request.method == 'GET':
-        return JsonResponse({
-            'mensagem': 'Envie usuário e senha usando POST.'
-        })
-
-    if request.method != 'POST':
-        return JsonResponse(
-            {'erro': 'Método não permitido.'},
-            status=405
-        )
-
-    form = LoginForm(request, data=request.POST)
-
-    if not form.is_valid():
-        return JsonResponse(
-            {'erro': 'Credenciais inválidas.'},
-            status=400
-        )
-
-    usuario = form.get_user()
-    login(request, usuario)
-
-    return JsonResponse({
-        'mensagem': 'Login realizado com sucesso.',
-        'usuario': usuario.username,
-        'perfil': usuario.tipo
-    })
-
+    
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        senha = request.POST.get('password')
+        usuario = authenticate(request, nome = nome, senha = senha)
+        if usuario is not None:
+            auth_login(request, usuario)
+            return redirect('login')
+    
+    return render(request, 'accounts/login.html') 
 
 def tipo_usuario_required(tipo_permitido):
     def decorator(view_func):
