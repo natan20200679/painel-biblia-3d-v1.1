@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from .forms import LoginForm
 from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST
+from .forms import CadastroForm
 
 
 def login_view(request):
@@ -56,10 +58,6 @@ def area_instituicao(request):
         'perfil': 'instituicao',
         'usuario': request.user.username
     })
-
-
-from django.views.decorators.http import require_POST
-from .forms import CadastroForm
 
 
 @require_POST
