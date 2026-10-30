@@ -25,6 +25,7 @@ class LoginForm(AuthenticationForm):
 class CadastroForm(UserCreationForm):
     
     class Meta:
+        
         model = Usuario
         fields = ['username', 'email']
 
