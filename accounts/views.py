@@ -84,16 +84,10 @@ def cadastro_view(request):
         status=201
     )
 
-
-@require_POST
 def logout_view(request):
     logout(request)
 
-    return JsonResponse({
-        'mensagem': 'Logout realizado com sucesso.'
-    })
-
-
+    return redirect('login')
 
 def status_api(request):
     return JsonResponse({
