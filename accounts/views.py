@@ -10,6 +10,7 @@ from .forms import LoginForm
 from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
 
+
 def login_view(request):
     
     if request.method == 'POST':
@@ -21,6 +22,7 @@ def login_view(request):
             return redirect('login')
     
     return render(request, 'accounts/login.html') 
+
 
 def tipo_usuario_required(tipo_permitido):
     def decorator(view_func):
@@ -83,6 +85,7 @@ def cadastro_view(request):
         },
         status=201
     )
+
 
 def logout_view(request):
     logout(request)
