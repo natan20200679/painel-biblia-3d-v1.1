@@ -1,17 +1,19 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from .models import Usuario
 
 
 class LoginForm(AuthenticationForm):
 
-    username = forms.CharField(
+    nome = forms.CharField(
         label='Usuário',
         widget=forms.TextInput(attrs={
             'placeholder': 'Digite seu usuário'
         })
     )
 
-    password = forms.CharField(
+    senha = forms.CharField(
         label='Senha',
         strip=False,
         widget=forms.PasswordInput(attrs={
@@ -20,12 +22,8 @@ class LoginForm(AuthenticationForm):
     )
 
 
-
-from django.contrib.auth.forms import UserCreationForm
-from .models import Usuario
-
-
 class CadastroForm(UserCreationForm):
+    
     class Meta:
         model = Usuario
         fields = ['username', 'email']
