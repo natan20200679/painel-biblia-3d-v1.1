@@ -89,6 +89,7 @@ def logout_view(request):
 
     return redirect('login')
 
+
 def status_api(request):
     return JsonResponse({
         'projeto': 'Bíblia 3D',
